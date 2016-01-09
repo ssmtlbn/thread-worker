@@ -1,0 +1,23 @@
+{
+  "name": "thread-worker",
+  "version": "0.0.1",
+  "description": "JavaScript multithreading library using web workers",
+  "keywords": [
+    "worker",
+    "web worker",
+    "thread",
+    "threading",
+    "multithreading",
+    "thread pool"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-contrib-clean": "0.7.0",
+    "grunt-contrib-concat": "0.5.1",
+    "grunt-contrib-copy": "0.8.2",
+    "grunt-contrib-uglify": "0.11.0",
+    "grunt-jsdoc": "1.1.0"
+  }
+}

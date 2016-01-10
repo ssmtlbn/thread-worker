@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: util.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,36 +17,37 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: util.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>thread-worker</h1><p>JavaScript multithreading library using web workers</p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Runs the given function deferred.
+ * 
+ * @param {function} fn The function to run.
+ */
+function runDeferred(fn) {
+  setTimeout(fn, 0);
+}
+exports.runDeferred = runDeferred;
+
+/**
+ * Checks if the current browser is IE.
+ * 
+ * @returns {boolean} true if current browser is IE, false otherwise
+ */
+function isIE() {
+  return (navigator.userAgent.indexOf('MSIE ') !== -1) 
+          || (navigator.userAgent.indexOf('Trident/') !== -1);
+}
+exports.isIE = isIE;</code></pre>
+        </article>
     </section>
-
-
 
 
 

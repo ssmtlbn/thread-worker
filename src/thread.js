@@ -28,15 +28,15 @@
  * 
  * @typedef {object} RequireJsConfig
  * @property {string} url Relative or absolute URL to the RequireJS script.
- * @property {string} [dataMain] Relative or absolute URL to a data-main script. 
- * You will typically use a data-main script to set configuration options. It 
- * is executed diretly after RequireJS has been loaded. See 
- * {@link http://requirejs.org/docs/api.html#data-main} for more
- * information about data-main script.
  * @property {object} config RequireJS configuration options. The configuration 
- * options will be set after the data-main script is executed (if specified). 
+ * options will be set diretly after RequireJS has been loaded.
  * See {@link http://requirejs.org/docs/api.html#config} for more
  * information about the configuration options.
+ * @property {string} [dataMain] Relative or absolute URL to a data-main script. 
+ * You will typically use a data-main script to set configuration options. It 
+ * is executed directly after RequireJS has been configured. See 
+ * {@link http://requirejs.org/docs/api.html#data-main} for more
+ * information about data-main script.
  */
 
 /**

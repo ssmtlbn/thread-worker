@@ -884,7 +884,7 @@ var workerCode = function() {
    */
   function run(args) {
     try {
-      fn.apply(null, [resolve, reject].concat(dependencies, args));
+      fn.apply(null, [resolve, reject].concat(args, dependencies));
     } catch (error) {
       reject(error);
     }

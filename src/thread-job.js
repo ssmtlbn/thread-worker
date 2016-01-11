@@ -8,11 +8,11 @@
  * If RequireJS is configured for the Thread: Module names of modules that
  * will be passed to the function of this job.
  * @param {ThreadFunction} fn The function to be executed.
- * @param {*} [arguments] Arguments that will be passed to the function to be
- * executed.
+ * @param {Array} [arguments] Arguments that will be passed to the function to 
+ * be executed.
  * @returns {ThreadJob} The newly created ThreadJob.
  */
-function ThreadJob() {
+function ThreadJob(fn) {
 
   /**
    * The name of this job.

@@ -120,7 +120,14 @@ ThreadPool.prototype.config = function init(cfg) {
 /**
  * Creates and adds a new job.
  * 
+ * @param {string} [name] The name of the new generated job.
+ * @param {Array<string>} [dependencies] Relative or absolute URLs to scripts 
+ * that should be imported into the worker.<br />
+ * If RequireJS is configured for the Thread: Module names of modules that 
+ * will be passed to the function of this job.
  * @param {ThreadFunction} fn The function to be executed.
+ * @param {Array} [arguments] Arguments that will be passed to the function to 
+ * be executed.
  * @returns {ThreadJob} The newly created job.
  */
 ThreadPool.prototype.run = function run(fn) {

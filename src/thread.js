@@ -303,9 +303,20 @@ Thread.prototype.config = function config(cfg) {
  * Creates and starts a new job. <br />
  * The thread is not automatically terminated after the execution of the job 
  * and can be reused. Should the thread not be used again, the function 
- * 'terminate()' should be called to free the resources.
+ * 'terminate()' should be called to free the resources.<br />
+ * It must be passed a ThreadJob as parameter or the parameters to generate 
+ * a new ThreadJob.
  * 
- * @param {ThreadFunction|ThreadJob} job The function or job to be executed.
+ * 
+ * @param {ThreadJob} [job] The job to be executed.
+ * @param {string} [name] The name of the new generated job.
+ * @param {Array<string>} [dependencies] Relative or absolute URLs to scripts 
+ * that should be imported into the worker.<br />
+ * If RequireJS is configured for the Thread: Module names of modules that 
+ * will be passed to the function of this job.
+ * @param {ThreadFunction} [fn] The function to be executed.
+ * @param {Array} [arguments] Arguments that will be passed to the function to 
+ * be executed.
  * @return {ThreadJob} The newly created job or the job given as parameter.
  */
 Thread.prototype.run = function run() {

@@ -1,5 +1,5 @@
 /*!
-ThreadWorker v0.0.1 
+ThreadWorker v0.0.2 
 (c) 2015 Samuel Samtleben 
 License: MIT 
 */
@@ -101,11 +101,11 @@ exports.EventManager = EventManager;
  * If RequireJS is configured for the Thread: Module names of modules that
  * will be passed to the function of this job.
  * @param {ThreadFunction} fn The function to be executed.
- * @param {*} [arguments] Arguments that will be passed to the function to be
- * executed.
+ * @param {Array} [arguments] Arguments that will be passed to the function to 
+ * be executed.
  * @returns {ThreadJob} The newly created ThreadJob.
  */
-function ThreadJob() {
+function ThreadJob(fn) {
 
   /**
    * The name of this job.
@@ -513,7 +513,14 @@ ThreadPool.prototype.config = function init(cfg) {
 /**
  * Creates and adds a new job.
  * 
+ * @param {string} [name] The name of the new generated job.
+ * @param {Array<string>} [dependencies] Relative or absolute URLs to scripts 
+ * that should be imported into the worker.<br />
+ * If RequireJS is configured for the Thread: Module names of modules that 
+ * will be passed to the function of this job.
  * @param {ThreadFunction} fn The function to be executed.
+ * @param {Array} [arguments] Arguments that will be passed to the function to 
+ * be executed.
  * @returns {ThreadJob} The newly created job.
  */
 ThreadPool.prototype.run = function run(fn) {
@@ -982,8 +989,6 @@ var workerCode = function() {
 // Create ObjectURL from worker code
 var workerObjectURL = URL.createObjectURL(new Blob(
         ['(', workerCode, ')()'], {type: 'application/javascript'}));
-// TODO: Add thread id (simple global counter?)
-
 /**
  * A function that will be executed in a thread.
  * 
@@ -1013,15 +1018,15 @@ var workerObjectURL = URL.createObjectURL(new Blob(
  * Configuration options to load and set up RequireJS for a thread.
  * 
  * @typedef {object} RequireJsConfig
- * @param {string} url Relative or absolute URL to the RequireJS script.
- * @param {string} [dataMain] Relative or absolute URL to a data-main script. 
+ * @property {string} url Relative or absolute URL to the RequireJS script.
+ * @property {string} [dataMain] Relative or absolute URL to a data-main script. 
  * You will typically use a data-main script to set configuration options. It 
  * is executed diretly after RequireJS has been loaded. See 
  * {@link http://requirejs.org/docs/api.html#data-main} for more
  * information about data-main script.
- * @param {object} config RequireJS configuration options. The configuration 
+ * @property {object} config RequireJS configuration options. The configuration 
  * options will be set after the data-main script is executed (if specified). 
- * See @link {http://requirejs.org/docs/api.html#config} for more
+ * See {@link http://requirejs.org/docs/api.html#config} for more
  * information about the configuration options.
  */
 
@@ -1289,9 +1294,20 @@ Thread.prototype.config = function config(cfg) {
  * Creates and starts a new job. <br />
  * The thread is not automatically terminated after the execution of the job 
  * and can be reused. Should the thread not be used again, the function 
- * 'terminate()' should be called to free the resources.
+ * 'terminate()' should be called to free the resources.<br />
+ * It must be passed a ThreadJob as parameter or the parameters to generate 
+ * a new ThreadJob.
  * 
- * @param {ThreadFunction|ThreadJob} job The function or job to be executed.
+ * 
+ * @param {ThreadJob} [job] The job to be executed.
+ * @param {string} [name] The name of the new generated job.
+ * @param {Array<string>} [dependencies] Relative or absolute URLs to scripts 
+ * that should be imported into the worker.<br />
+ * If RequireJS is configured for the Thread: Module names of modules that 
+ * will be passed to the function of this job.
+ * @param {ThreadFunction} [fn] The function to be executed.
+ * @param {Array} [arguments] Arguments that will be passed to the function to 
+ * be executed.
  * @return {ThreadJob} The newly created job or the job given as parameter.
  */
 Thread.prototype.run = function run() {

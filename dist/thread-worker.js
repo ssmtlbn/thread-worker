@@ -841,9 +841,8 @@ var workerCode = function() {
         // of the executing file
         intRjsConf.baseUrl = toAbsoluteURL('./');
       }
-      if(rjsConf.config) {
-        require.config(rjsConf.config);
-      }
+      
+      require.config(intRjsConf);
 
       var dataMainDependency = [];
       if(rjsConf.dataMain) {

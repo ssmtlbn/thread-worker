@@ -244,8 +244,13 @@ var workerCode = function() {
       var baseParts = execLocation.pathname.split('/'),
           relativeParts = relativeUrl.split('/');
 
-      // remove filename or empty string
+      // remove trailing filename or empty string
       baseParts.pop();
+      
+      // remove leading empty string if available
+      if(baseParts.length > 0 && baseParts[0] === '') {
+        baseParts.shift();
+      };
 
       for(var i = 0; i < relativeParts.length; i++) {
         if(relativeParts[i] === '.') {
@@ -258,7 +263,7 @@ var workerCode = function() {
         }
       }
       return execLocation.protocol + '//' + execLocation.hostname + ':' 
-              + execLocation.port + baseParts.join('/');
+              + execLocation.port + '/' + baseParts.join('/');
     }
   }
   

@@ -691,7 +691,14 @@ ThreadPool.prototype.getQueueSize = function getQueueSize() {
  * otherwise.
  */
 ThreadPool.prototype.isThreadAvailable = function isThreadAvailable() {
-  return this._queue.length === 0 && this._threads.length < this._size;
+  return this._queue.length === 0
+          && (
+              this._threads.length < this._size 
+              || (
+                  this._threadsState[Thread.State.NEW].length > 0 
+                  || this._threadsState[Thread.State.FREE].length > 0
+                 )
+             );
 };
 
 /**

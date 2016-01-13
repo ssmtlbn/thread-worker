@@ -287,7 +287,7 @@ ThreadPool.prototype.clearQueue = function clearQueue() {
  * @returns {mumber} Current size of the queue.
  */
 ThreadPool.prototype.getQueueSize = function getQueueSize() {
-  return this._jobQueue.length;
+  return this._queue.length;
 };
 
 /**

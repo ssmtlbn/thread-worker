@@ -885,13 +885,20 @@ var workerCode = function() {
    * Starts the function to be executed.
    * 
    * @private
-   * @param {Array|undefined} args Data arguments to be passed to the function 
-   * or undefined if there are no arguments to pass. Will be concatenated
-   * with the resolve-/reject-functions and the dependencies automatically.
+   * @param {Array|undefined} [args] Data arguments to be passed to the 
+   * function. Will be concatenated with the resolve-/reject-functions and 
+   * the dependencies automatically.
    */
   function run(args) {
     try {
-      fn.apply(null, [resolve, reject].concat(args, dependencies));
+      var concArgs = [resolve, reject];
+      if(args && args.length > 0) {
+        concArgs = concArgs.concat(args);
+      }
+      if(dependencies && dependencies.length > 0) {
+        concArgs = concArgs.concat(dependencies);
+      };
+      fn.apply(null, concArgs);
     } catch (error) {
       reject(error);
     }
